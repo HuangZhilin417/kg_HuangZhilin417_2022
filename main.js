@@ -33,19 +33,28 @@ for (i = 0; i < myArgs.length; i++) {
 // Print out the final result in stdout
 process.stdout.write(finalPrintResult)
 
-// Helper function to check the input integers to see if they are valid and if 
-//  returning the phonetic string
+
+// Helper function to check the input integers to see if they are valid and if not valid, throw error
+// else return the phonetic string version of the integer
 function numberToString(validString) {
     var result = ''
     for (j = 0; j < validString.length; j++) {
+
+        // If the input sub character is in the valid mapping
         if (intMap.has(validString[j])) {
+
+            // Making sure that a negative sign can only exist in the front of the integers
             if (j != 0 && validString[j] == '-') {
                 throw new Error('invalid integer ' + validString + ', detected negative sign but not in the front of the numbers');
             }
+
+            // Making sure zeros cannot exist infront of the integers
             if ((j == 0 && validString.length != 1 && validString[j] == 0)
                 || (validString.length > 1 && validString[0] == '-' && validString[1] == '0')) {
                 throw new Error('invalid integer ' + validString + ', detected zero infront of integers');
             }
+
+            // If character valid, add to our final result
             result += intMap.get(validString[j]);
         } else {
             throw new Error('invalid integer ' + validString + ', it should be an integer');
