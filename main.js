@@ -15,3 +15,20 @@ let intMap = new Map([
     ['9', 'Nine'],
     ['-', 'Negative']
 ]);
+
+// Initialize the final output result and the converted array of strings
+var finalPrintResult = '';
+var finalArray = []
+
+// Going through the input integers and parsing it to valid phonteic version of the string
+for (i = 0; i < myArgs.length; i++) {
+    var parsed = numberToString(myArgs[i]);
+    finalPrintResult += parsed
+    finalArray.push(parsed)
+    if (i != myArgs.length - 1) {
+        finalPrintResult += ',';
+    }
+}
+
+//print out the final result in stdout
+process.stdout.write(finalPrintResult)
