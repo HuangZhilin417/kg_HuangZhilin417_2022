@@ -30,5 +30,26 @@ for (i = 0; i < myArgs.length; i++) {
     }
 }
 
-//print out the final result in stdout
+// Print out the final result in stdout
 process.stdout.write(finalPrintResult)
+
+// Helper function to check the input integers to see if they are valid and if 
+//  returning the phonetic string
+function numberToString(validString) {
+    var result = ''
+    for (j = 0; j < validString.length; j++) {
+        if (intMap.has(validString[j])) {
+            if (j != 0 && validString[j] == '-') {
+                throw new Error('invalid integer ' + validString + ', detected negative sign but not in the front of the numbers');
+            }
+            if ((j == 0 && validString.length != 1 && validString[j] == 0)
+                || (validString.length > 1 && validString[0] == '-' && validString[1] == '0')) {
+                throw new Error('invalid integer ' + validString + ', detected zero infront of integers');
+            }
+            result += intMap.get(validString[j]);
+        } else {
+            throw new Error('invalid integer ' + validString + ', it should be an integer');
+        }
+    }
+    return result;
+}
